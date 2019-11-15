@@ -47,10 +47,26 @@ const TextEditor = ({ text }) => {
     setWordsArray(newWordsArr);
   };
 
+  const changeText = (oldWord, newValue) => {
+    if (/[A-Z]/.test(oldWord[0])) {
+      return newValue.charAt(0).toUpperCase() + newValue.slice(1);
+    } else if (oldWord.indexOf("?") !== -1) {
+      return `${newValue}?`;
+    } else if (oldWord.indexOf(",") !== -1) {
+      return `${newValue},`;
+    } else if (oldWord.indexOf(".") !== -1) {
+      return `${newValue}.`;
+    } else if (oldWord.indexOf("!") !== -1) {
+      return `${newValue}!`;
+    } else {
+      return newValue;
+    }
+  };
+
   const selectSynonym = value => {
     const newWordsArr = wordsArray.map(el => {
       if (el.value === activeData.value) {
-        el.value = value;
+        el.value = changeText(el.value, value);
       }
       return el;
     });
