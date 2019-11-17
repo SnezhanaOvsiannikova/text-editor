@@ -37,7 +37,7 @@ const TextEditor = ({ text }) => {
   };
   const setStyles = (key, color) => {
     const newWordsArr = wordsArray.map(el => {
-      if (el.value === activeData.value) {
+      if (el.id === activeData.id) {
         if (key) el[key] = !el[key];
         if (color) el.color = color;
       }
@@ -47,25 +47,21 @@ const TextEditor = ({ text }) => {
     setWordsArray(newWordsArr);
   };
 
-  const changeText = (oldWord, newValue) => {
-    if (/[A-Z]/.test(oldWord[0])) {
-      return newValue.charAt(0).toUpperCase() + newValue.slice(1);
-    } else if (oldWord.indexOf("?") !== -1) {
-      return `${newValue}?`;
-    } else if (oldWord.indexOf(",") !== -1) {
-      return `${newValue},`;
-    } else if (oldWord.indexOf(".") !== -1) {
-      return `${newValue}.`;
-    } else if (oldWord.indexOf("!") !== -1) {
-      return `${newValue}!`;
-    } else {
-      return newValue;
+  const changeText = (word, newValue) => {
+    let newVal = newValue;
+    if (/[A-Z]/.test(word[0])) {
+      newVal = newValue.charAt(0).toUpperCase() + newValue.slice(1);
     }
+
+    if (/[.,?/#!$%^&*;:{}=\-_`~()]/g.test(word)) {
+      newVal = newValue + word[word.length - 1];
+    }
+    return newVal;
   };
 
   const selectSynonym = value => {
     const newWordsArr = wordsArray.map(el => {
-      if (el.value === activeData.value) {
+      if (el.id === activeData.id) {
         el.value = changeText(el.value, value);
       }
       return el;
@@ -78,13 +74,15 @@ const TextEditor = ({ text }) => {
     <>
       <div>{renderWordsList()}</div>
       {isShowPopup && (
-        <Popup
-          activeData={activeData}
-          wordsArray={wordsArray}
-          showPopup={showPopup}
-          setStyles={setStyles}
-          selectSynonym={selectSynonym}
-        />
+        <div className="popup-wrapper">
+          <Popup
+            activeData={activeData}
+            wordsArray={wordsArray}
+            showPopup={showPopup}
+            setStyles={setStyles}
+            selectSynonym={selectSynonym}
+          />
+        </div>
       )}
     </>
   );

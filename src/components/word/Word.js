@@ -19,7 +19,14 @@ const Word = ({ data, showPopup }) => {
 };
 
 Text.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    isBold: PropTypes.bool,
+    isItalic: PropTypes.bool,
+    isUnderline: PropTypes.bool,
+    color: PropTypes.string,
+  }),
   showPopup: PropTypes.func
 };
 

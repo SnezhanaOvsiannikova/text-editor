@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getSynonyms } from "../../utils";
+import { getSynonyms, removePunctuation } from "../../utils";
 
 const Synonyms = ({ activeData, selectSynonym }) => {
+  const newVal = removePunctuation(activeData.value);
   const [synonyms, setSynonyms] = useState([]);
   useEffect(() => {
-    getSynonyms(activeData.value, setSynonyms);
-  }, [activeData]);
+    getSynonyms(newVal, setSynonyms);
+  }, [activeData, newVal]);
 
   return (
     <>
@@ -14,9 +15,9 @@ const Synonyms = ({ activeData, selectSynonym }) => {
       <select
         id="selectSynonym"
         onChange={e => selectSynonym(e.target.value)}
-        value={activeData.value}
+        value={newVal}
       >
-        <option value={activeData.value}>{activeData.value}</option>
+        <option value={newVal}>{newVal}</option>
         {synonyms.slice(0, 10).map(el => (
           <option key={el.word} value={el.word}>
             {el.word}
@@ -28,7 +29,14 @@ const Synonyms = ({ activeData, selectSynonym }) => {
 };
 
 Text.propTypes = {
-  activeData: PropTypes.object,
+  activeData: PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    isBold: PropTypes.bool,
+    isItalic: PropTypes.bool,
+    isUnderline: PropTypes.bool,
+    color: PropTypes.string,
+  }),
   selectSynonym: PropTypes.func
 };
 

@@ -42,7 +42,14 @@ const Popup = ({ activeData, showPopup, setStyles, selectSynonym }) => {
 };
 
 Text.propTypes = {
-  activeData: PropTypes.object,
+  activeData: PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    isBold: PropTypes.bool,
+    isItalic: PropTypes.bool,
+    isUnderline: PropTypes.bool,
+    color: PropTypes.string,
+  }),
   setStyles: PropTypes.func,
   showPopup: PropTypes.func,
   selectSynonym: PropTypes.func
