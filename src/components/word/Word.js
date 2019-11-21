@@ -18,7 +18,7 @@ const Word = ({ data, showPopup }) => {
   );
 };
 
-Text.propTypes = {
+Word.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.string,

@@ -77,7 +77,6 @@ const TextEditor = ({ text }) => {
         <div className="popup-wrapper">
           <Popup
             activeData={activeData}
-            wordsArray={wordsArray}
             showPopup={showPopup}
             setStyles={setStyles}
             selectSynonym={selectSynonym}
@@ -88,7 +87,7 @@ const TextEditor = ({ text }) => {
   );
 };
 
-Text.propTypes = {
+TextEditor.propTypes = {
   text: PropTypes.string
 };
 

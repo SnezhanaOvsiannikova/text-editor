@@ -28,7 +28,7 @@ const Synonyms = ({ activeData, selectSynonym }) => {
   );
 };
 
-Text.propTypes = {
+Synonyms.propTypes = {
   activeData: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.string,

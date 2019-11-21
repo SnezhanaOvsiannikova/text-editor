@@ -41,7 +41,7 @@ const Popup = ({ activeData, showPopup, setStyles, selectSynonym }) => {
   );
 };
 
-Text.propTypes = {
+Popup.propTypes = {
   activeData: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.string,
